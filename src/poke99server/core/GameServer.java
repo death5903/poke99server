@@ -3,20 +3,16 @@ package poke99server.core;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Queue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadPoolExecutor;
 
 import javax.websocket.CloseReason;
 import javax.websocket.Endpoint;
 import javax.websocket.EndpointConfig;
 import javax.websocket.Session;
 
-import org.apache.tomcat.util.collections.SynchronizedQueue;
 
 import poke99server.gameobj.GameField;
-import poke99server.gameobj.GameTask;
 import poke99server.utils.GameLogger;
 import poke99server.utils.GameMessageGenerator;
 import poke99server.utils.GameMessagePostman;

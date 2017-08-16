@@ -1,7 +1,5 @@
 package poke99server.gameobj;
 
-import java.util.Date;
-
 import javax.websocket.Session;
 
 import poke99server.utils.GameLogger;
