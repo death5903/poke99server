@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF8">
+<title>Insert title here</title>
+</head>
+<body>
+	<input type="text" id="input1">
+	<button id="btn1">測試LOG</button>
+	<script>
+		let p = 0;
+		let socket = new WebSocket("ws://localhost:8080/poke99server/server");
+		socket.onopen = function() {
+			console.log("on open");
+		}
+		socket.onmessage = function(evt){
+			let msg = JSON.parse(evt.data);
+			console.log(msg);
+		}
+	
+		let input1 = document.getElementById("input1");
+		let btn1 = document.getElementById("btn1");
+	
+		btn1.addEventListener("click", function(e) {
+			let s = input1.value;
+			/*
+			let jObj = {
+				"action" : s,
+				"data" : "50"
+			};
+			*/
+			//socket.send(JSON.stringify(jObj));
+			
+			setInterval(function() {
+				p++;
+				let jObj = {
+					"action" : s,
+					"data" : s
+				};
+				jObj = JSON.stringify(jObj);
+				socket.send(jObj);
+			}, 1000);
+			
+		}, false);
+	</script>
+</body>
+</html>
