@@ -28,7 +28,7 @@ public class MessageDecoder implements Decoder.Text<GameMessage> {
 	public GameMessage decode(String str) throws DecodeException {
 		JsonObject jObj = Json.createReader(new StringReader(str)).readObject();
 		
-		return GameMessageGenerator.create(jObj.getString("action"), jObj.getString("data"));
+		return GameMessageGenerator.create(jObj.getString("action"), jObj.getString("data"),jObj.getString("data2"));
 	}
 
 	@Override

@@ -25,7 +25,9 @@ public class MessageEncoder implements Encoder.Text<GameMessage> {
 		
 		JsonObject jObj = Json.createObjectBuilder()
 				.add("action", message.getAction())
-				.add("data", message.getData()).build();
+				.add("data", message.getData())
+				.add("data2", message.getData2())
+				.build();
 		
 		return jObj.toString();
 	}
