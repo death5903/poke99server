@@ -23,25 +23,10 @@
 	
 		btn1.addEventListener("click", function(e) {
 			let s = input1.value;
-			/*
-			let jObj = {
-				"action" : s,
-				"data" : "50"
-			};
-			*/
-			//socket.send(JSON.stringify(jObj));
 			
-			setInterval(function() {
-				p++;
-				let jObj = {
-					"action" : s,
-					"data" : s
-				};
-				jObj = JSON.stringify(jObj);
-				socket.send(jObj);
-			}, 1000);
+			socket.send(s);
 			
-		}, false);
+			});
 	</script>
 </body>
 </html>

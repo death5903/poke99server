@@ -18,16 +18,17 @@ public class GameMessageHandler implements MessageHandler.Whole<GameMessage> {
 	public GameMessageHandler(Session session) {
 		this.playerSession = session;
 		this.gameHandleTaskThreadPool = GameServer.gameHandleTaskThreadPool;
-		GameLogger.log("message 初始化");
 	}
 	
 	@Override
 	public void onMessage(GameMessage message) {
 		
-		for(int i=0;i<10;i++)
-		gameHandleTaskThreadPool.execute(GameTaskGenerator.create(playerSession, message));
+//		for(int i=0;i<10;i++)
+//		gameHandleTaskThreadPool.execute(GameTaskGenerator.create(playerSession, message));
+//		
+//		System.out.println(Thread.currentThread().getName()+"/"+new Date().getTime()+"/主");
 		
-		System.out.println(Thread.currentThread().getName()+"/"+new Date().getTime()+"/主");
+		gameHandleTaskThreadPool.execute(GameTaskGenerator.create(playerSession, message));
 		
 	}
 

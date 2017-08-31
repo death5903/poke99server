@@ -1,6 +1,8 @@
 package poke99server.gameobj;
 
 import java.io.StringReader;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.json.Json;
 import javax.json.JsonObject;
@@ -27,20 +29,29 @@ public class MessageDecoder implements Decoder.Text<GameMessage> {
 	@Override
 	public GameMessage decode(String str) throws DecodeException {
 		JsonObject jObj = Json.createReader(new StringReader(str)).readObject();
-		
-		return GameMessageGenerator.create(jObj.getString("action"), jObj.getString("data"));
+		switch (jObj.keySet().size()) {
+		case 1:
+			return GameMessageGenerator.create(jObj.getString("action"));
+		case 2:
+			return GameMessageGenerator.create(jObj.getString("action"), jObj.getString("data"));
+		case 3:
+			return GameMessageGenerator.create(jObj.getString("action"), jObj.getString("data"),
+					jObj.getString("data2"));
+		default:
+			return null;
+		}
 	}
 
 	@Override
 	public boolean willDecode(String str) {
 		boolean flag = true;
-		try{
+		try {
 			Json.createReader(new StringReader(str)).readObject();
-		}catch(Exception e){
+		} catch (Exception e) {
 			flag = false;
 			e.printStackTrace();
 		}
-		
+
 		return flag;
 	}
 

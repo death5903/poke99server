@@ -22,11 +22,10 @@ public class MessageEncoder implements Encoder.Text<GameMessage> {
 
 	@Override
 	public String encode(GameMessage message) throws EncodeException {
-		
-		JsonObject jObj = Json.createObjectBuilder()
-				.add("action", message.getAction())
-				.add("data", message.getData()).build();
-		
+
+		JsonObject jObj = Json.createObjectBuilder().add("action", message.getAction()).add("data", message.getData())
+				.add("data2", message.getData2()).build();
+
 		return jObj.toString();
 	}
 

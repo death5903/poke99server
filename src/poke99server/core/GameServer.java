@@ -11,7 +11,6 @@ import javax.websocket.Endpoint;
 import javax.websocket.EndpointConfig;
 import javax.websocket.Session;
 
-
 import poke99server.gameobj.GameField;
 import poke99server.utils.GameLogger;
 import poke99server.utils.GameMessageGenerator;
@@ -22,7 +21,6 @@ public class GameServer extends Endpoint {
 
 	public static Map<Integer, Session> allPlayerSession = Collections.synchronizedMap(new HashMap<Integer, Session>());
 	public static Map<Integer, GameField> allGameField = Collections.synchronizedMap(new HashMap<Integer, GameField>());
-//	public static SynchronizedQueue<GameTask> gameTaskQueue = new SynchronizedQueue<GameTask>();
 	public static ExecutorService gameHandleTaskThreadPool = Executors.newFixedThreadPool(2);
 
 	public GameServer() {

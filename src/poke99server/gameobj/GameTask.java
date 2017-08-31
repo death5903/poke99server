@@ -4,6 +4,7 @@ import javax.websocket.Session;
 
 import poke99server.utils.GameLogger;
 import poke99server.utils.GameMessagePostman;
+import poke99server.utils.ServerActions;
 
 public class GameTask implements Runnable {
 
@@ -19,12 +20,11 @@ public class GameTask implements Runnable {
 	public void run() {
 
 		switch (message.getAction()) {
-		case "test":
-			GameLogger.log(message);
-			if (playerSession.isOpen()) {
-				GameMessagePostman.send(playerSession, message);
-			}
+		case "LOGIN":
 
+			break;
+		default:
+			GameMessagePostman.send(this.playerSession, message);
 		}
 	}
 
