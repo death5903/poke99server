@@ -12,6 +12,7 @@ import javax.websocket.EndpointConfig;
 import javax.websocket.Session;
 
 import poke99server.gameobj.GameField;
+import poke99server.gameobj.Player;
 import poke99server.utils.GameLogger;
 import poke99server.utils.GameMessageGenerator;
 import poke99server.utils.GameMessagePostman;
@@ -19,7 +20,7 @@ import poke99server.utils.ServerActions;
 
 public class GameServer extends Endpoint {
 
-	public static Map<Integer, Session> allPlayerSession = Collections.synchronizedMap(new HashMap<Integer, Session>());
+	public static Map<Integer, Player> allPlayer = Collections.synchronizedMap(new HashMap<Integer, Player>());
 	public static Map<Integer, GameField> allGameField = Collections.synchronizedMap(new HashMap<Integer, GameField>());
 	public static ExecutorService gameHandleTaskThreadPool = Executors.newFixedThreadPool(2);
 
@@ -30,13 +31,15 @@ public class GameServer extends Endpoint {
 
 	@Override
 	public void onOpen(Session session, EndpointConfig arg1) {
+		
+		Player incomingPlayer = new Player(session);
 
 		GameLogger.log("產: " + session.hashCode() + " 祅笴栏!");
 
 		session.addMessageHandler(new GameMessageHandler(session));
 
-		allPlayerSession.put(session.hashCode(), session);
-		GameLogger.log("絬计: " + allPlayerSession.size());
+		allPlayer.put(session.hashCode(), incomingPlayer);
+		GameLogger.log("絬计: " + allPlayer.size());
 
 		GameMessagePostman.send(session, GameMessageGenerator.create(ServerActions.LOGIN.toString(), "success"));
 
@@ -44,11 +47,11 @@ public class GameServer extends Endpoint {
 
 	@Override
 	public void onClose(Session session, CloseReason closeReason) {
+		
+		GameLogger.log("產: " + session.hashCode() + " 瞒秨笴栏!");
 
-		GameLogger.log("產: " + session.hashCode() + " 祇ネ岿粇!");
-
-		allPlayerSession.remove(session.hashCode());
-		GameLogger.log("絬计: " + allPlayerSession.size());
+		allPlayer.remove(session.hashCode());
+		GameLogger.log("絬计: " + allPlayer.size());
 	}
 
 	@Override
@@ -56,8 +59,8 @@ public class GameServer extends Endpoint {
 
 		GameLogger.log("產: " + session.hashCode() + " 耞絬!");
 
-		allPlayerSession.remove(session.hashCode());
-		GameLogger.log("絬计: " + allPlayerSession.size());
+		allPlayer.remove(session.hashCode());
+		GameLogger.log("絬计: " + allPlayer.size());
 
 	}
 
